@@ -58,6 +58,18 @@ public class ShooterHoodSubsystem extends SubsystemBase {
         return (double)shooterHood.getSensorCollection().getQuadraturePosition();
     }
 
+    
+    public double getHoodAngle()  {
+        double d = Math.random()*9 + 1;
+        //double d needs to be the information coming from teh limelight, the length reported from the limelight
+        double h = 0.0254 * (Constants.targetHeight - Constants.cameraHeight);
+        //conversion from inches to meters    
+        double theta = Math.atan(2 * h/d);
+        //calculations for theta of equation
+    
+        return theta; 
+    }
+
     @Override
     public void periodic() {
         super.periodic();
@@ -67,5 +79,6 @@ public class ShooterHoodSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("hood Current", shooterHood.getSupplyCurrent());
         SmartDashboard.putBoolean("HoodTriggered?", isLimitSwitchTriggered());
     }
+   
 
 }
